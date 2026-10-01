@@ -214,6 +214,23 @@ function renderEducation(rule) {
     </article>
   `).join("");
 
+  const requestTable = data.requestTable ? `
+    <section class="info-block education-block">
+      <h4>지도자 영상판독 신청 가능 / 불가</h4>
+      <div class="ivr-grid">
+        <div class="ivr-column ivr-yes">
+          <h5>✓ 신청 가능</h5>
+          <ul>${(data.requestTable.allowed || []).map(v => `<li>${escapeHtml(v)}</li>`).join("")}</ul>
+        </div>
+        <div class="ivr-column ivr-no">
+          <h5>✕ 신청 대상 아님</h5>
+          <ul>${(data.requestTable.notAllowed || []).map(v => `<li>${escapeHtml(v)}</li>`).join("")}</ul>
+        </div>
+      </div>
+      ${data.requestTable.note ? `<p class="ivr-note"><strong>요청 범위:</strong> ${escapeHtml(data.requestTable.note)}</p>` : ""}
+    </section>
+  ` : "";
+
   return `
     <section class="info-block education-block">
       <h4>쉽게 풀어쓴 해설 <span class="edu-label">원문 기반 교육용</span></h4>
@@ -223,10 +240,11 @@ function renderEducation(rule) {
       <h4>심판 핵심 포인트</h4>
       <ul class="referee-points">${points}</ul>
     </section>
+    ${requestTable}
     <section class="info-block education-block">
       <h4>실제 경기 상황 예시</h4>
       <div class="case-list">${cases}</div>
-      <p class="education-note">※ 위 사례는 제14조 원문과 해설에 명시된 기준을 이해하기 쉽게 재구성한 교육용 예시입니다.</p>
+      <p class="education-note">※ 위 사례는 해당 조항 원문을 이해하기 쉽게 재구성한 교육용 예시입니다. 실제 판정은 해당 경기의 적용 규정과 구체적 상황을 함께 확인하세요.</p>
     </section>
   `;
 }
