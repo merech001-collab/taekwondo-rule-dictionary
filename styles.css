@@ -214,3 +214,128 @@ button { cursor: pointer; }
   gap: 8px;
   flex-wrap: wrap;
 }
+
+
+/* UX refresh: wrap categories and add referee quick-search */
+.chips {
+  flex-wrap: wrap;
+  overflow-x: visible;
+  padding-bottom: 0;
+}
+.chip {
+  flex: 0 0 auto;
+}
+.quick-section {
+  margin: 18px 0 14px;
+  padding: 16px 18px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+.quick-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.quick-heading strong {
+  color: var(--navy);
+  font-size: 17px;
+}
+.quick-heading span {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.quick-searches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.quick-btn {
+  border: 1px solid #b8c7d7;
+  background: #f8fbff;
+  color: var(--navy);
+  border-radius: 999px;
+  padding: 9px 12px;
+  font-weight: 800;
+  font-size: 14px;
+}
+.quick-btn:hover {
+  border-color: var(--navy);
+  background: var(--soft);
+}
+.education-block {
+  padding-top: 4px;
+}
+.edu-label {
+  display: inline-flex;
+  margin-left: 6px;
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: #eef6ff;
+  color: #245b8f;
+  font-size: 11px;
+  vertical-align: middle;
+}
+.referee-points {
+  margin: 0;
+  padding-left: 20px;
+}
+.referee-points li {
+  margin-bottom: 8px;
+}
+.case-list {
+  display: grid;
+  gap: 10px;
+}
+.case-card {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 13px 14px;
+  background: #fbfdff;
+}
+.case-card h5 {
+  margin: 0 0 8px;
+  color: var(--navy);
+  font-size: 15px;
+}
+.case-card p {
+  margin: 5px 0;
+  line-height: 1.6;
+}
+.decision-badge {
+  display: inline-flex;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #fff1f2;
+  color: #a11d2d;
+  font-weight: 800;
+}
+.education-note {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+@media (max-width: 720px) {
+  .quick-section {
+    padding: 14px;
+  }
+  .quick-searches {
+    gap: 7px;
+  }
+  .quick-btn {
+    padding: 9px 11px;
+    font-size: 13px;
+  }
+  .chips {
+    gap: 7px;
+  }
+  .chip {
+    padding: 8px 11px;
+    font-size: 13px;
+  }
+}
