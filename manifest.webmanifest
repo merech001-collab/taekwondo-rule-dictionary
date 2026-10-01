@@ -1,0 +1,26 @@
+{
+  "name": "태권도 겨루기 경기규칙 전자사전",
+  "short_name": "태권도 규칙",
+  "description": "2026 태권도 겨루기 경기규칙을 빠르게 검색하고 현장에서 확인하는 전자사전",
+  "lang": "ko-KR",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f5f7fa",
+  "theme_color": "#102a43",
+  "icons": [
+    {
+      "src": "icons/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/app-icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
