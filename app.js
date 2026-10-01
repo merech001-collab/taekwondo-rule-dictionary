@@ -164,7 +164,7 @@ function renderDetail(rule) {
       </div>
       <section class="info-block">
         <h4>규정 원문 및 해설</h4>
-        <pre class="official-text">${escapeHtml(rule.officialText)}</pre>
+        <div class="official-text">${formatOfficialText(rule.officialText)}</div>
       </section>
       ${renderEducation(rule)}
       <section class="info-block">
@@ -274,6 +274,28 @@ function runSearch() {
   } else {
     renderDetail(null);
   }
+}
+
+function formatOfficialText(value) {
+  const lines = String(value || "").split("\n");
+  return lines.map(line => {
+    const escaped = escapeHtml(line);
+    const trimmed = line.trim();
+
+    if (/^주\s*$/.test(trimmed)) {
+      return `<div class="note-heading">주</div>`;
+    }
+
+    if (/^주[①-⑳0-9]/.test(trimmed)) {
+      return `<div class="note-line">${escaped}</div>`;
+    }
+
+    if (/^★\s*심판지침/.test(trimmed)) {
+      return `<div class="referee-guideline-heading">${escaped}</div>`;
+    }
+
+    return `<div class="official-line">${escaped || "&nbsp;"}</div>`;
+  }).join("");
 }
 
 function escapeHtml(value) {
