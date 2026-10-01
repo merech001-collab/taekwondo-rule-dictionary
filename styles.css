@@ -390,3 +390,22 @@ button { cursor: pointer; }
     grid-template-columns: 1fr;
   }
 }
+
+
+.applicability-notice {
+  display: grid;
+  gap: 5px;
+  margin-top: 12px;
+  padding: 12px 14px;
+  border: 1px solid #f2c879;
+  border-left: 5px solid #d97706;
+  border-radius: 12px;
+  background: #fff8e8;
+  color: #6b4a0b;
+}
+.applicability-notice strong {
+  font-size: 14px;
+}
+.applicability-notice span {
+  line-height: 1.65;
+}
