@@ -235,6 +235,7 @@ function renderEducation(rule) {
     <section class="info-block education-block">
       <h4>쉽게 풀어쓴 해설 <span class="edu-label">원문 기반 교육용</span></h4>
       <p>${escapeHtml(data.summary)}</p>
+      ${data.applicabilityNotice ? `<div class="applicability-notice"><strong>적용범위 주의</strong><span>${escapeHtml(data.applicabilityNotice.replace(/^적용범위 주의:\s*/, ""))}</span></div>` : ""}
     </section>
     <section class="info-block education-block">
       <h4>심판 핵심 포인트</h4>
