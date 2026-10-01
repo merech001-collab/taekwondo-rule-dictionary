@@ -170,3 +170,47 @@ button { cursor: pointer; }
   .toc-card { display: none; }
   .detail-card { grid-column: auto; }
 }
+
+.official-badge {
+  color: #0f5132;
+  background: #d1fae5;
+}
+.source-note {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+}
+.source-banner {
+  display: grid;
+  gap: 4px;
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  border: 1px solid #b7dfc7;
+  border-radius: 12px;
+  background: #f0fdf4;
+  color: #14532d;
+}
+.source-banner span {
+  font-size: 13px;
+  line-height: 1.5;
+}
+.official-text {
+  margin: 0;
+  padding: 16px;
+  max-height: 68vh;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fbfdff;
+  color: #1f2933;
+  font: inherit;
+  font-size: 15px;
+  line-height: 1.75;
+}
+.detail-actions {
+  gap: 8px;
+  flex-wrap: wrap;
+}
