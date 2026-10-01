@@ -339,3 +339,54 @@ button { cursor: pointer; }
     font-size: 13px;
   }
 }
+
+
+.ivr-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.ivr-column {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px;
+}
+.ivr-column h5 {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+.ivr-column ul {
+  margin: 0;
+  padding-left: 20px;
+}
+.ivr-column li {
+  margin-bottom: 8px;
+  line-height: 1.55;
+}
+.ivr-yes {
+  background: #f0fdf4;
+  border-color: #b7dfc7;
+}
+.ivr-yes h5 {
+  color: #166534;
+}
+.ivr-no {
+  background: #fff7f7;
+  border-color: #efc2c2;
+}
+.ivr-no h5 {
+  color: #a11d2d;
+}
+.ivr-note {
+  margin: 10px 0 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #fff8db;
+  color: #6b5310;
+  line-height: 1.6;
+}
+@media (max-width: 720px) {
+  .ivr-grid {
+    grid-template-columns: 1fr;
+  }
+}
