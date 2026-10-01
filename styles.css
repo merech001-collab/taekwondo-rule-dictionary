@@ -439,3 +439,53 @@ button { cursor: pointer; }
   color: #8a4b08;
   font-weight: 900;
 }
+
+
+/* PWA install and offline UI */
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.install-btn {
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 16px;
+  background: var(--navy);
+  color: #fff;
+  font-weight: 800;
+}
+.install-btn:hover {
+  background: var(--navy-2);
+}
+.connection-status {
+  display: none;
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  z-index: 50;
+  max-width: min(92vw, 560px);
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: #102a43;
+  color: #fff;
+  box-shadow: var(--shadow);
+  font-size: 13px;
+  text-align: center;
+}
+.connection-status.show {
+  display: block;
+}
+
+@media (max-width: 720px) {
+  .top-actions {
+    gap: 6px;
+  }
+  .install-btn,
+  .ghost-btn {
+    padding: 9px 10px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+}
