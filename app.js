@@ -24,7 +24,9 @@ const els = {
   recentSearches: document.querySelector("#recentSearches"),
   clearFilters: document.querySelector("#clearFilters"),
   favoritesToggle: document.querySelector("#favoritesToggle"),
-  quickSearches: document.querySelector("#quickSearches")
+  quickSearches: document.querySelector("#quickSearches"),
+  installAppBtn: document.querySelector("#installAppBtn"),
+  connectionStatus: document.querySelector("#connectionStatus")
 };
 
 function getFavorites() {
@@ -342,4 +344,75 @@ if (rules.length) {
   selectedId = rules[0].id;
   render();
   renderDetail(rules[0]);
+}
+
+
+let deferredInstallPrompt = null;
+
+function isStandaloneMode() {
+  return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+}
+
+function updateInstallButton() {
+  if (!els.installAppBtn) return;
+  if (isStandaloneMode()) {
+    els.installAppBtn.hidden = true;
+    return;
+  }
+  els.installAppBtn.hidden = false;
+}
+
+function showInstallHelp() {
+  const isiOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  if (isiOS) {
+    alert("아이폰·아이패드에서는 Safari의 공유 버튼을 누른 뒤 ‘홈 화면에 추가’를 선택하세요.");
+  } else {
+    alert("브라우저 메뉴에서 ‘앱 설치’ 또는 ‘홈 화면에 추가’를 선택하세요. Chrome에서는 주소창 오른쪽에 설치 아이콘이 보일 수도 있습니다.");
+  }
+}
+
+window.addEventListener("beforeinstallprompt", event => {
+  event.preventDefault();
+  deferredInstallPrompt = event;
+  updateInstallButton();
+});
+
+window.addEventListener("appinstalled", () => {
+  deferredInstallPrompt = null;
+  updateInstallButton();
+});
+
+if (els.installAppBtn) {
+  els.installAppBtn.addEventListener("click", async () => {
+    if (deferredInstallPrompt) {
+      deferredInstallPrompt.prompt();
+      await deferredInstallPrompt.userChoice;
+      deferredInstallPrompt = null;
+      updateInstallButton();
+    } else {
+      showInstallHelp();
+    }
+  });
+}
+
+function updateConnectionStatus() {
+  if (!els.connectionStatus) return;
+  if (navigator.onLine) {
+    els.connectionStatus.textContent = "";
+    els.connectionStatus.classList.remove("show");
+  } else {
+    els.connectionStatus.textContent = "오프라인 모드 · 저장된 경기규칙을 계속 사용할 수 있습니다.";
+    els.connectionStatus.classList.add("show");
+  }
+}
+
+window.addEventListener("online", updateConnectionStatus);
+window.addEventListener("offline", updateConnectionStatus);
+updateConnectionStatus();
+updateInstallButton();
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js").catch(() => {});
+  });
 }
