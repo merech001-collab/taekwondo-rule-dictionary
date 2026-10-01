@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#102a43"/>
+  <circle cx="256" cy="256" r="174" fill="#ffffff"/>
+  <path d="M174 160h164v42h-58v150h-48V202h-58z" fill="#102a43"/>
+  <path d="M158 326c35 28 69 42 98 42 39 0 72-15 99-44" fill="none" stroke="#c62828" stroke-width="28" stroke-linecap="round"/>
+  <text x="256" y="438" text-anchor="middle" font-family="Arial,sans-serif" font-size="58" font-weight="700" fill="#ffffff">TKD</text>
+</svg>
