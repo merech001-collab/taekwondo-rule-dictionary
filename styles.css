@@ -409,3 +409,33 @@ button { cursor: pointer; }
 .applicability-notice span {
   line-height: 1.65;
 }
+
+
+/* Official rule note emphasis */
+.official-text {
+  white-space: normal;
+}
+.official-line,
+.note-line,
+.note-heading,
+.referee-guideline-heading {
+  white-space: pre-wrap;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+.note-heading {
+  margin: 12px 0 4px;
+  color: #b42318;
+  font-weight: 900;
+  font-size: 16px;
+}
+.note-line {
+  margin: 2px 0;
+  color: #b42318;
+  font-weight: 700;
+}
+.referee-guideline-heading {
+  margin: 14px 0 6px;
+  color: #8a4b08;
+  font-weight: 900;
+}
