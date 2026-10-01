@@ -23,7 +23,8 @@ const els = {
   detailPanel: document.querySelector("#detailPanel"),
   recentSearches: document.querySelector("#recentSearches"),
   clearFilters: document.querySelector("#clearFilters"),
-  favoritesToggle: document.querySelector("#favoritesToggle")
+  favoritesToggle: document.querySelector("#favoritesToggle"),
+  quickSearches: document.querySelector("#quickSearches")
 };
 
 function getFavorites() {
@@ -81,6 +82,22 @@ function renderCategories() {
       selectedId = null;
       render();
       renderDetail(null);
+    });
+  });
+}
+
+function renderQuickSearches() {
+  const items = window.QUICK_SEARCHES || [];
+  if (!els.quickSearches) return;
+  els.quickSearches.innerHTML = items.map(item =>
+    `<button class="quick-btn" data-quick="${escapeHtml(item.query)}">${escapeHtml(item.label)}</button>`
+  ).join("");
+  els.quickSearches.querySelectorAll("[data-quick]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      activeCategory = "전체";
+      favoritesOnly = false;
+      els.searchInput.value = btn.dataset.quick;
+      runSearch();
     });
   });
 }
@@ -149,9 +166,10 @@ function renderDetail(rule) {
         <h4>규정 원문 및 해설</h4>
         <pre class="official-text">${escapeHtml(rule.officialText)}</pre>
       </section>
+      ${renderEducation(rule)}
       <section class="info-block">
-        <h4>다음 확장</h4>
-        <p class="muted">조항별 쉬운 해설, 실제 판정 사례, 관련 영상 및 규정 개정 전후 비교를 이 영역에 추가할 수 있습니다.</p>
+        <h4>관련 기능</h4>
+        <p class="muted">즐겨찾기와 빠른검색을 이용하면 경기 현장에서 자주 보는 조항을 더 빨리 찾을 수 있습니다.</p>
       </section>
     </div>
     <div class="detail-actions">
@@ -175,6 +193,42 @@ function renderDetail(rule) {
       setTimeout(() => { const b=document.querySelector("#copyBtn"); if(b) b.textContent="원문 복사"; }, 1200);
     } catch {}
   });
+}
+
+function renderEducation(rule) {
+  const data = (window.EDUCATION_DATA || {})[rule.id];
+  if (!data) {
+    return `<section class="info-block">
+      <h4>교육용 해설</h4>
+      <p class="muted">이 조항의 쉬운 해설과 판정 사례는 순차적으로 추가할 예정입니다.</p>
+    </section>`;
+  }
+
+  const points = (data.refereePoints || []).map(v => `<li>${escapeHtml(v)}</li>`).join("");
+  const cases = (data.cases || []).map(item => `
+    <article class="case-card">
+      <h5>${escapeHtml(item.title)}</h5>
+      <p><strong>상황</strong> ${escapeHtml(item.situation)}</p>
+      <p><strong>판정</strong> <span class="decision-badge">${escapeHtml(item.decision)}</span></p>
+      <p><strong>근거</strong> ${escapeHtml(item.reason)}</p>
+    </article>
+  `).join("");
+
+  return `
+    <section class="info-block education-block">
+      <h4>쉽게 풀어쓴 해설 <span class="edu-label">원문 기반 교육용</span></h4>
+      <p>${escapeHtml(data.summary)}</p>
+    </section>
+    <section class="info-block education-block">
+      <h4>심판 핵심 포인트</h4>
+      <ul class="referee-points">${points}</ul>
+    </section>
+    <section class="info-block education-block">
+      <h4>실제 경기 상황 예시</h4>
+      <div class="case-list">${cases}</div>
+      <p class="education-note">※ 위 사례는 제14조 원문과 해설에 명시된 기준을 이해하기 쉽게 재구성한 교육용 예시입니다.</p>
+    </section>
+  `;
 }
 
 function bindRuleButtons(root) {
@@ -214,6 +268,7 @@ function escapeHtml(value) {
 
 function render() {
   renderCategories();
+  renderQuickSearches();
   renderRecent();
   const items = filteredRules();
   renderToc(items);
